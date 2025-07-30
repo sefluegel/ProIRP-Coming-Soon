@@ -1,74 +1,88 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pro IRP – Coming Soon</title>
-    <link rel="icon" type="image/png" href="logo.png" />
-    <style>
-      body {
-        margin: 0;
-        background-color: #0e1a2b;
-        color: #f8fafc;
-        font-family: Arial, sans-serif;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        text-align: center;
-      }
+// ProIRP Landing Page (React + TailwindCSS)
+import { useState } from "react";
 
-      img {
-        max-width: 180px;
-        margin-bottom: 20px;
-      }
+export default function LandingPage() {
+  const [submitted, setSubmitted] = useState(false);
 
-      h1 {
-        font-size: 2.5rem;
-        margin: 0;
-      }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // TODO: Connect to Mailchimp, Zapier, Airtable, or backend
+    setSubmitted(true);
+  };
 
-      p {
-        font-size: 1.2rem;
-        margin: 15px 0;
-        max-width: 90%;
-      }
+  return (
+    <div className="min-h-screen bg-white text-gray-800">
+      {/* Logo & Header */}
+      <header className="flex items-center justify-between px-6 py-4 border-b">
+        <img src="/proirp-logo.png" alt="Pro IRP Logo" className="h-10" />
+        <span className="font-bold text-xl">Pro IRP</span>
+      </header>
 
-      .email-box {
-        margin-top: 25px;
-      }
+      {/* Hero Section */}
+      <section className="text-center px-6 py-16 bg-gray-100">
+        <h1 className="text-4xl font-bold mb-4">
+          The First AI-Powered Retention Tool Built for Medicare Agents
+        </h1>
+        <p className="text-lg max-w-xl mx-auto mb-8">
+          Predict churn before it happens. Proactively retain clients. Built by an agent who lived the problem.
+        </p>
 
-      input[type="email"] {
-        padding: 10px;
-        border: none;
-        border-radius: 4px;
-        width: 240px;
-      }
+        {!submitted ? (
+          <form onSubmit={handleSubmit} className="max-w-md mx-auto flex flex-col gap-4">
+            <input
+              type="email"
+              required
+              placeholder="Enter your email to join the waitlist"
+              className="p-3 rounded border border-gray-300"
+            />
+            <button
+              type="submit"
+              className="bg-blue-600 text-white py-3 rounded font-semibold hover:bg-blue-700"
+            >
+              Join the Waitlist
+            </button>
+          </form>
+        ) : (
+          <p className="text-green-600 text-lg font-medium">You're on the list! We'll keep you updated.</p>
+        )}
+      </section>
 
-      button {
-        padding: 10px 15px;
-        margin-left: 10px;
-        border: none;
-        border-radius: 4px;
-        background-color: #3b82f6;
-        color: white;
-        font-weight: bold;
-        cursor: pointer;
-      }
+      {/* Features Section */}
+      <section className="px-6 py-20 max-w-5xl mx-auto">
+        <h2 className="text-3xl font-bold text-center mb-10">What Pro IRP Delivers</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div>
+            <h3 className="text-xl font-semibold mb-2">AI-Powered Risk Scoring</h3>
+            <p>Automatically flags at-risk clients using SEP triggers, Rx changes, inactivity, and plan-switch patterns.</p>
+          </div>
+          <div>
+            <h3 className="text-xl font-semibold mb-2">Automated Follow-Up</h3>
+            <p>Launch personalized SMS, email, and call prompts—so you re-engage before someone else does.</p>
+          </div>
+          <div>
+            <h3 className="text-xl font-semibold mb-2">Real-Time Alerts</h3>
+            <p>Get notified when a client's behavior signals churn risk—no more blind spots in your book.</p>
+          </div>
+          <div>
+            <h3 className="text-xl font-semibold mb-2">Retention-Focused Dashboard</h3>
+            <p>Track who’s safe, who’s slipping, and what actions have been taken—at a glance.</p>
+          </div>
+        </div>
+      </section>
 
-      button:hover {
-        background-color: #2563eb;
-      }
-    </style>
-  </head>
-  <body>
-    <img src="logo.png" alt="Pro IRP Logo" />
-    <h1>Pro IRP</h1>
-    <p>Our revolutionary Insurance Retention Partner platform is launching soon. Stay tuned.</p>
-    <div class="email-box">
-      <input type="email" placeholder="Enter your email" />
-      <button>Notify Me</button>
+      {/* Social Proof Section */}
+      <section className="bg-blue-50 px-6 py-16 text-center">
+        <h2 className="text-2xl font-bold mb-4">Built by a Medicare Agent. Designed for Retention.</h2>
+        <p className="max-w-2xl mx-auto text-lg">
+          “After a decade in the field, I was tired of watching clients get flipped out from under me. Pro IRP is the tool I wish I had years ago—and now I’m building it for everyone else.”
+        </p>
+        <p className="mt-4 font-semibold">— Scott Fluegel, Founder</p>
+      </section>
+
+      {/* Footer */}
+      <footer className="text-center py-6 text-sm text-gray-500 border-t mt-12">
+        © {new Date().getFullYear()} Pro IRP. All rights reserved.
+      </footer>
     </div>
-  </body>
-</html>
+  );
+}
